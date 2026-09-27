@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta name="description"
+content="JAY RAM - Online Fashion & Sports Store">
+
+<title>JAY RAM | Online Shopping</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+  background:#f1f3f6;
+  color:#212121;
+}
+
+button{
+  cursor:pointer;
+}
+
+.top{
+  background:#111;
+  color:white;
+  padding:7px 6%;
+  font-size:13px;
+}
+
+header{
+  background:#111;
+  color:white;
+  padding:13px 5%;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  gap:25px;
+}
+
+.logo{
+  font-size:30px;
+  font-weight:bold;
+  white-space:nowrap;
+}
+
+.search{
+  flex:1;
+  display:flex;
+  max-width:700px;
+}
+
+.search input{
+  width:100%;
+  padding:14px;
+  border:0;
+  outline:0;
+  font-size:15px;
+}
+
+.search button{
+  width:55px;
+  border:0;
+  background:#ffc107;
+  font-size:18px;
+}
+
+.nav-btn{
+  color:white;
+  background:transparent;
+  border:0;
+  font-size:15px;
+}
+
+.cart-btn{
+  color:white;
+  border:0;
+  background:transparent;
+  font-size:16px;
+}
+
+.hero{
+  margin:15px auto;
+  width:94%;
+  min-height:350px;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  padding:50px 7%;
+  color:white;
+  background:
+  linear-gradient(90deg,#111 20%,rgba(0,0,0,.55)),
+  url("https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1600&q=85")
+  center/cover;
+}
+
+.hero h1{
+  font-size:52px;
+  margin-bottom:15px;
+}
+
+.hero p{
+  font-size:20px;
+  margin-bottom:25px;
+}
+
+.shop{
+  padding:14px 28px;
+  border:0;
+  background:#ffc107;
+  font-weight:bold;
+  border-radius:4px;
+}
+
+.categories{
+  width:94%;
+  margin:auto;
+  background:white;
+  padding:25px;
+  border-radius:8px;
+}
+
+.categories h2{
+  margin-bottom:18px;
+}
+
+.category-list{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+}
+
+.category{
+  min-width:110px;
+  text-align:center;
+  padding:15px 10px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  background:white;
+}
+
+.category:hover{
+  background:#111;
+  color:white;
+}
+
+.products-area{
+  width:94%;
+  margin:18px auto 50px;
+}
+
+.product-header{
+  background:white;
+  padding:18px;
+  margin-bottom:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.sort{
+  padding:9px;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:
+  repeat(auto-fill,minmax(210px,1fr));
+  gap:12px;
+}
+
+.card{
+  background:white;
+  position:relative;
+  overflow:hidden;
+  transition:.2s;
+}
+
+.card:hover{
+  box-shadow:0 3px 12px #bbb;
+  transform:translateY(-2px);
+}
+
+.product-image{
+  width:100%;
+  height:250px;
+  object-fit:cover;
+}
+
+.wish{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:35px;
+  height:35px;
+  border:0;
+  border-radius:50%;
+  background:white;
+  font-size:19px;
+}
+
+.info{
+  padding:13px;
+}
+
+.brand{
+  color:#777;
+  font-size:13px;
+}
+
+.name{
+  margin:5px 0;
+  font-size:16px;
+}
+
+.rating{
+  display:inline-block;
+  padding:4px 7px;
+  background:#168b3b;
+  color:white;
+  border-radius:4px;
+  font-size:12px;
+}
+
+.price{
+  margin-top:8px;
+  font-size:20px;
+  font-weight:bold;
+}
+
+.old{
+  color:#888;
+  text-decoration:line-through;
+  font-size:13px;
+  margin-left:7px;
+}
+
+.discount{
+  color:#008000;
+  font-size:13px;
+  margin-left:7px;
+}
+
+.actions{
+  display:flex;
+  gap:7px;
+  margin-top:12px;
+}
+
+.add{
+  flex:1;
+  border:1px solid #111;
+  background:white;
+  padding:10px;
+  border-radius:4px;
+}
+
+.buy{
+  flex:1;
+  border:0;
+  background:#ff9f00;
+  padding:10px;
+  border-radius:4px;
+  font-weight:bold;
+}
+
+.drawer{
+  position:fixed;
+  right:-450px;
+  top:0;
+  width:420px;
+  max-width:100%;
+  height:100vh;
+  background:white;
+  z-index:3000;
+  box-shadow:-5px 0 20px #777;
+  transition:.3s;
+  padding:22px;
+  overflow:auto;
+}
+
+.drawer.open{
+  right:0;
+}
+
+.drawer-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #ddd;
+  padding-bottom:15px;
+}
+
+.close{
+  font-size:25px;
+  border:0;
+  background:white;
+}
+
+.cart-item{
+  display:flex;
+  gap:10px;
+  padding:15px 0;
+  border-bottom:1px solid #ddd;
+}
+
+.cart-item img{
+  width:70px;
+  height:80px;
+  object-fit:cover;
+}
+
+.cart-item-info{
+  flex:1;
+}
+
+.remove{
+  color:red;
+  border:0;
+  background:white;
+}
+
+.total{
+  margin:20px 0;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.checkout{
+  width:100%;
+  padding:15px;
+  background:#008000;
+  color:white;
+  border:0;
+  border-radius:5px;
+  font-size:16px;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  z-index:4000;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:850px;
+  max-width:100%;
+  max-height:90vh;
+  overflow:auto;
+  background:white;
+  border-radius:8px;
+  padding:25px;
+}
+
+.modal-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+}
+
+.modal-grid img{
+  width:100%;
+  max-height:500px;
+  object-fit:cover;
+}
+
+.payment{
+  margin-top:20px;
+  border-top:1px solid #ddd;
+  padding-top:20px;
+}
+
+.payment label{
+  display:block;
+  border:1px solid #ddd;
+  padding:13px;
+  margin:8px 0;
+  border-radius:5px;
+}
+
+.pay-btn{
+  width:100%;
+  padding:14px;
+  background:#111;
+  color:white;
+  border:0;
+  margin-top:15px;
+}
+
+footer{
+  background:#111;
+  color:white;
+  padding:50px 7%;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:
+  repeat(auto-fit,minmax(200px,1fr));
+  gap:30px;
+}
+
+footer p{
+  color:#bbb;
+  margin:9px 0;
+}
+
+@media(max-width:700px){
+
+  .nav{
+    flex-wrap:wrap;
+    gap:12px;
+  }
+
+  .logo{
+    font-size:23px;
+  }
+
+  .search{
+    order:5;
+    flex-basis:100%;
+  }
+
+  .hero{
+    min-height:300px;
+  }
+
+  .hero h1{
+    font-size:36px;
+  }
+
+  .products{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .product-image{
+    height:190px;
+  }
+
+  .modal-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top">
+Free Demo Store • JAY RAM
+</div>
+
+<header>
+
+<div class="nav">
+
+<div class="logo">JAY RAM</div>
+
+<div class="search">
+<input
+id="search"
+placeholder="Search for products..."
+oninput="searchProducts()">
+<button>🔍</button>
+</div>
+
+<button class="nav-btn">
+Login
+</button>
+
+<button
+class="cart-btn"
+onclick="openCart()">
+🛒 Cart
+(<span id="cartCount">0</span>)
+</button>
+
+</div>
+
+</header>
+
+
+<section class="hero">
+
+<div>
+
+<h1>JAY RAM</h1>
+
+<p>
+Fashion • Sports • Lifestyle
+</p>
+
+<button
+class="shop"
+onclick="scrollProducts()">
+SHOP NOW
+</button>
+
+</div>
+
+</section>
+
+
+<section class="categories">
+
+<h2>Shop By Category</h2>
+
+<div class="category-list">
+
+<button class="category"
+onclick="filterProducts('All')">
+🛍️
+<br>All
+</button>
+
+<button class="category"
+onclick="filterProducts('T-Shirt')">
+👕
+<br>T-Shirts
+</button>
+
+<button class="category"
+onclick="filterProducts('Pant')">
+👖
+<br>Pants
+</button>
+
+<button class="category"
+onclick="filterProducts('Hoodie')">
+🧥
+<br>Hoodies
+</button>
+
+<button class="category"
+onclick="filterProducts('Tracksuit')">
+🥋
+<br>Tracksuits
+</button>
+
+<button class="category"
+onclick="filterProducts('Shoes')">
+👟
+<br>Shoes
+</button>
+
+</div>
+
+</section>
+
+
+<section
+class="products-area"
+id="productsArea">
+
+<div class="product-header">
+
+<h2>
+Products
+<span id="resultCount"></span>
+</h2>
+
+<select
+class="sort"
+onchange="sortProducts(this.value)">
+
+<option value="default">
+Sort
+</option>
+
+<option value="low">
+Price: Low to High
+</option>
+
+<option value="high">
+Price: High to Low
+</option>
+
+</select>
+
+</div>
+
+<div
+class="products"
+id="products">
+</div>
+
+</section>
+
+
+<!-- CART -->
+
+<div
+class="drawer"
+id="cartDrawer">
+
+<div class="drawer-head">
+
+<h2>Your Cart</h2>
+
+<button
+class="close"
+onclick="closeCart()">
+✕
+</button>
+
+</div>
+
+<div id="cartItems"></div>
+
+<div class="total">
+
+Total:
+₹<span id="total">0</span>
+
+</div>
+
+<button
+class="checkout"
+onclick="openCheckout()">
+Proceed to Checkout
+</button>
+
+</div>
+
+
+<!-- PRODUCT MODAL -->
+
+<div
+class="modal"
+id="productModal">
+
+<div class="modal-box">
+
+<button
+class="close"
+onclick="closeProduct()">
+✕
+</button>
+
+<div
+class="modal-grid"
+id="productDetails">
+</div>
+
+</div>
+
+</div>
+
+
+<!-- CHECKOUT -->
+
+<div
+class="modal"
+id="checkoutModal">
+
+<div class="modal-box">
+
+<button
+class="close"
+onclick="closeCheckout()">
+✕
+</button>
+
+<h2>Checkout</h2>
+
+<br>
+
+<input
+style="width:100%;padding:13px;margin:6px 0"
+placeholder="Full Name">
+
+<input
+style="width:100%;padding:13px;margin:6px 0"
+placeholder="Mobile Number">
+
+<textarea
+style="width:100%;padding:13px;margin:6px 0"
+placeholder="Delivery Address"></textarea>
+
+<div class="payment">
+
+<h3>Select Payment Method</h3>
+
+<label>
+<input type="radio" name="pay" checked>
+UPI
+</label>
+
+<label>
+<input type="radio" name="pay">
+Debit Card
+</label>
+
+<label>
+<input type="radio" name="pay">
+Credit Card
+</label>
+
+<label>
+<input type="radio" name="pay">
+Net Banking
+</label>
+
+<button
+class="pay-btn"
+onclick="demoPayment()">
+Continue to Payment
+</button>
+
+<p style="margin-top:12px;color:#777">
+Demo mode: no real money will be charged.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<footer>
+
+<div class="footer-grid">
+
+<div>
+<h2>JAY RAM</h2>
+<p>
+Your online fashion & lifestyle store.
+</p>
+</div>
+
+<div>
+<h3>Customer Service</h3>
+<p>Contact Us</p>
+<p>Order Tracking</p>
+<p>Return Policy</p>
+<p>Help Center</p>
+</div>
+
+<div>
+<h3>Company</h3>
+<p>About JAY RAM</p>
+<p>Privacy Policy</p>
+<p>Terms & Conditions</p>
+</div>
+
+<div>
+<h3>Contact</h3>
+<p>📞 +91 XXXXX XXXXX</p>
+<p>📧 support@jayram.com</p>
+</div>
+
+</div>
+
+<br><br>
+
+<center>
+© 2026 JAY RAM — Demo Store
+</center>
+
+</footer>
+
+
+<script>
+
+/* =========================
+   50 PRODUCTS
+========================= */
+
+const imagePool=[
+
+"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=85",
+
+"https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=700&q=85",
+
+"https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=700&q=85",
+
+"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=85",
+
+"https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=700&q=85",
+
+"https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=700&q=85",
+
+"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=85",
+
+"https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=700&q=85",
+
+"https://images.unsplash.com/photo-1552902865-b72c031ac5ea?auto=format&fit=crop&w=700&q=85",
+
+"https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&w=700&q=85"
+
+];
+
+
+const names=[
+
+"Premium Cotton T-Shirt",
+"Oversized T-Shirt",
+"Classic Black T-Shirt",
+"Premium White T-Shirt",
+"Sports T-Shirt",
+"Running T-Shirt",
+"Casual T-Shirt",
+"Printed T-Shirt",
+"Regular Fit T-Shirt",
+"Summer T-Shirt",
+
+"Classic Running Pant",
+"Sports Track Pant",
+"Premium Night Pant",
+"Casual Pant",
+"Jogger Pant",
+"Training Pant",
+"Comfort Pant",
+"Gym Pant",
+"Regular Fit Pant",
+"Cargo Pant",
+
+"Premium Hoodie",
+"Black Hoodie",
+"Winter Hoodie",
+"Oversized Hoodie",
+"Sports Hoodie",
+"Zip Hoodie",
+"Casual Hoodie",
+"Fleece Hoodie",
+"Printed Hoodie",
+"Premium Sweatshirt",
+
+"Sports Tracksuit",
+"Running Tracksuit",
+"Training Tracksuit",
+"Premium Tracksuit",
+"Winter Tracksuit",
+"Gym Tracksuit",
+"Casual Tracksuit",
+"Classic Tracksuit",
+"Full Zip Tracksuit",
+"Sports Set",
+
+"Running Shoes",
+"Sports Shoes",
+"Casual Shoes",
+"Training Shoes",
+"Walking Shoes",
+"Gym Shoes",
+"Premium Sports Shoes",
+"Lightweight Shoes",
+"Men's Sneakers",
+"Daily Wear Shoes"
+
+];
+
+
+const categories=[
+
+"T-Shirt","T-Shirt","T-Shirt","T-Shirt","T-Shirt",
+"T-Shirt","T-Shirt","T-Shirt","T-Shirt","T-Shirt",
+
+"Pant","Pant","Pant","Pant","Pant",
+"Pant","Pant","Pant","Pant","Pant",
+
+"Hoodie","Hoodie","Hoodie","Hoodie","Hoodie",
+"Hoodie","Hoodie","Hoodie","Hoodie","Hoodie",
+
+"Tracksuit","Tracksuit","Tracksuit","Tracksuit","Tracksuit",
+"Tracksuit","Tracksuit","Tracksuit","Tracksuit","Tracksuit",
+
+"Shoes","Shoes","Shoes","Shoes","Shoes",
+"Shoes","Shoes","Shoes","Shoes","Shoes"
+
+];
+
+
+let products=[];
+
+
+for(let i=0;i<50;i++){
+
+let base=399+(i*37)%1200;
+
+products.push({
+
+id:i+1,
+
+name:names[i],
+
+category:categories[i],
+
+price:base,
+
+oldPrice:Math.round(base*1.35),
+
+rating:(4+(i%10)/10).toFixed(1),
+
+image:imagePool[i%imagePool.length]
+
+});
+
+}
+
+
+/* =========================
+   VARIABLES
+========================= */
+
+let currentProducts=[...products];
+
+let cart=[];
+
+
+/* =========================
+   DISPLAY PRODUCTS
+========================= */
+
+function displayProducts(list){
+
+const box=document.getElementById("products");
+
+box.innerHTML="";
+
+document.getElementById("resultCount")
+.innerText=` (${list.length})`;
+
+list.forEach(p=>{
+
+let discount=
+Math.round(
+((p.oldPrice-p.price)/p.oldPrice)*100
+);
+
+box.innerHTML+=`
+
+<div class="card">
+
+<button
+class="wish"
+onclick="wishlist(${p.id})">
+♡
+</button>
+
+<img
+class="product-image"
+src="${p.image}"
+alt="${p.name}"
+loading="lazy">
+
+<div class="info">
+
+<div class="brand">
+JAY RAM
+</div>
+
+<div class="name">
+${p.name}
+</div>
+
+<span class="rating">
+⭐ ${p.rating}
+</span>
+
+<div class="price">
+₹${p.price}
+
+<span class="old">
+₹${p.oldPrice}
+</span>
+
+<span class="discount">
+${discount}% off
+</span>
+
+</div>
+
+<div class="actions">
+
+<button
+class="add"
+onclick="addToCart(${p.id})">
+Add Cart
+</button>
+
+<button
+class="buy"
+onclick="buyNow(${p.id})">
+Buy Now
+</button>
+
+</div>
+
+<button
+style="width:100%;margin-top:7px;padding:9px;border:0;background:#eee"
+onclick="showProduct(${p.id})">
+View Details
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchProducts(){
+
+const text=
+document
+.getElementById("search")
+.value
+.toLowerCase();
+
+currentProducts=products.filter(p=>
+
+p.name.toLowerCase().includes(text) ||
+
+p.category.toLowerCase().includes(text)
+
+);
+
+displayProducts(currentProducts);
+
+}
+
+
+/* =========================
+   FILTER
+========================= */
+
+function filterProducts(category){
+
+if(category==="All"){
+
+currentProducts=[...products];
+
+}else{
+
+currentProducts=
+products.filter(p=>p.category===category);
+
+}
+
+displayProducts(currentProducts);
+
+}
+
+
+/* =========================
+   SORT
+========================= */
+
+function sortProducts(type){
+
+if(type==="low"){
+
+currentProducts.sort(
+(a,b)=>a.price-b.price
+);
+
+}
+
+if(type==="high"){
+
+currentProducts.sort(
+(a,b)=>b.price-a.price
+);
+
+}
+
+displayProducts(currentProducts);
+
+}
+
+
+/* =========================
+   CART
+========================= */
+
+function addToCart(id){
+
+const product=
+products.find(p=>p.id===id);
+
+cart.push(product);
+
+updateCart();
+
+openCart();
+
+}
+
+
+function updateCart(){
+
+document.getElementById("cartCount")
+.innerText=cart.length;
+
+const box=
+document.getElementById("cartItems");
+
+box.innerHTML="";
+
+let total=0;
+
+cart.forEach((p,index)=>{
+
+total+=p.price;
+
+box.innerHTML+=`
+
+<div class="cart-item">
+
+<img src="${p.image}">
+
+<div class="cart-item-info">
+
+<b>${p.name}</b>
+
+<p>₹${p.price}</p>
+
+<button
+class="remove"
+onclick="removeCart(${index})">
+Remove
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("total")
+.innerText=total;
+
+}
+
+
+function removeCart(index){
+
+cart.splice(index,1);
+
+updateCart();
+
+}
+
+
+function openCart(){
+
+document
+.getElementById("cartDrawer")
+.classList.add("open");
+
+}
+
+
+function closeCart(){
+
+document
+.getElementById("cartDrawer")
+.classList.remove("open");
+
+}
+
+
+/* =========================
+   PRODUCT DETAILS
+========================= */
+
+function showProduct(id){
+
+const p=products.find(x=>x.id===id);
+
+document.getElementById("productDetails")
+.innerHTML=`
+
+<div>
+
+<img src="${p.image}">
+
+</div>
+
+<div>
+
+<h1>${p.name}</h1>
+
+<br>
+
+<span class="rating">
+⭐ ${p.rating}
+</span>
+
+<h2 style="margin-top:15px">
+₹${p.price}
+</h2>
+
+<p style="margin-top:15px">
+Original Price:
+<s>₹${p.oldPrice}</s>
+</p>
+
+<br>
+
+<p>
+Premium quality product from JAY RAM.
+Available in multiple sizes and colors.
+</p>
+
+<br>
+
+<button
+class="buy"
+style="width:100%;padding:14px"
+onclick="addToCart(${p.id});closeProduct()">
+ADD TO CART
+</button>
+
+</div>
+
+`;
+
+document
+.getElementById("productModal")
+.classList.add("show");
+
+}
+
+
+function closeProduct(){
+
+document
+.getElementById("productModal")
+.classList.remove("show");
+
+}
+
+
+/* =========================
+   BUY NOW
+========================= */
+
+function buyNow(id){
+
+cart=[];
+
+const p=
+products.find(x=>x.id===id);
+
+cart.push(p);
+
+updateCart();
+
+openCheckout();
+
+}
+
+
+/* =========================
+   CHECKOUT
+========================= */
+
+function openCheckout(){
+
+if(cart.length===0){
+
+alert("Cart is empty");
+
+return;
+
+}
+
+document
+.getElementById("checkoutModal")
+.classList.add("show");
+
+}
+
+
+function closeCheckout(){
+
+document
+.getElementById("checkoutModal")
+.classList.remove("show");
+
+}
+
+
+function demoPayment(){
+
+alert(
+"Demo Payment\n\n"+
+"Payment gateway demo opened.\n\n"+
+"No real money has been charged."
+);
+
+closeCheckout();
+
+cart=[];
+
+updateCart();
+
+}
+
+
+/* =========================
+   WISHLIST
+========================= */
+
+function wishlist(id){
+
+alert(
+"Product added to Wishlist ❤️"
+);
+
+}
+
+
+/* =========================
+   SCROLL
+========================= */
+
+function scrollProducts(){
+
+document
+.getElementById("productsArea")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* INITIAL */
+
+displayProducts(products);
+
+</script>
+
+</body>
+</html>
